@@ -3,7 +3,6 @@ import pytesseract
 import sys
 from pdf2image import convert_from_path
 import os
-from gtts import gTTS
 pdf = "Renner.pdf"
 outfile = "output.txt"
 if len(sys.argv) > 1:

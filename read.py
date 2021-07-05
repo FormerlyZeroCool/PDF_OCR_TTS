@@ -1,16 +1,18 @@
 import os
 import sys
-from gtts import gTTS
 import pyttsx3
-import vlc
 import time
-voice_driver = "nsss"
+if sys.platform == "darwin":
+    voice_driver = "nsss"
+elif sys.platform == "win32":
+    voice_driver = "sapi5"
+else:
+    voice_driver = "espeak"
 engine = pyttsx3.init(driverName = voice_driver)
 def say(text, rate = 1):
     engine.setProperty('rate', int(200*rate))
     engine.say(text)
     engine.runAndWait()
-    time.sleep(0.1*(1/rate))
 filepath = ''
 playback_rate = 1
 startingLine = 0
@@ -27,13 +29,13 @@ else:
 
 file = open(filepath,'r')
 data = file.read()
+dataList = data.replace('-','').split('.')
 if(startingLine < 0):
     startingLine = 0
-dataList = data.replace('-',' ').split('.')
 lines = dataList[startingLine:]
 sentenceNo = startingLine
 lineNo = 0
-previousLines = dataList[0:startingLine]
+previousLines = dataList[0:startingLine-1]
 
 for line in previousLines:
     lineNo += line.count("\n")
