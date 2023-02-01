@@ -3,8 +3,8 @@ import pytesseract
 import sys
 from pdf2image import convert_from_path
 import os
-pdf = "Renner.pdf"
-outfile = "output.txt"
+pdf = sys.argv[1]
+outfile = sys.argv[2]
 if len(sys.argv) > 1:
     pdf = sys.argv[1]
     if len(sys.argv) > 2:
